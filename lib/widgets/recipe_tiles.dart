@@ -94,6 +94,9 @@ class FeaturedRecipeTile extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final recipe = ref.watch(recipeProvider);
+    if (recipe.isEmpty || recipe == []){
+        return const Center(child: Text("Loading...."));
+    } else {
     final featuredRecipe =
         recipe.where((recipe) => recipe.recipeName == "Vegan Lasagna").first;
 
@@ -127,5 +130,6 @@ class FeaturedRecipeTile extends ConsumerWidget {
         ),
       ),
     );
+    }
   }
 }
