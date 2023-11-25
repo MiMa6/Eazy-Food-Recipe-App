@@ -20,17 +20,38 @@ class CommonAppBarWidget extends AppBar {
                   ),
                 ),
               ),
-              Flexible(
+              Expanded(
+                flex: 1,
                   child: Center(
                 child: Container(
                     constraints: const BoxConstraints(maxWidth: 300),
                     child: const SearchRecipeBarWidget()),
               )),
+              GoLoginPageWidget(),
             ],
           ),
         );
 }
 
+class GoLoginPageWidget extends ConsumerWidget {
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+
+    return Row(
+      children: [
+        Center(
+            child: IconButton(
+              icon: Icon(Icons.login, color: Colors.white,),
+              onPressed: () {
+                context.go('/login');
+              },
+              
+            ),
+        ),
+      ],
+    );
+  }
+}
 class SearchRecipeBarWidget extends ConsumerWidget {
   const SearchRecipeBarWidget({super.key});
 
