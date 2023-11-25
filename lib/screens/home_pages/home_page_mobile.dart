@@ -38,6 +38,7 @@ class HomePageMobile extends StatelessWidget {
         const SizedBox(height: 20),
 
         // FEATURED RECEIPE
+
         const Expanded(child: FeaturedRecipeTile()),
 
         const SizedBox(height: 20),

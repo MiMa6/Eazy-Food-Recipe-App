@@ -7,7 +7,7 @@ import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 
 import 'screens/home_pages/home_page_layout.dart';
-import 'screens/category_pages/recipe_category_page_layout.dart';
+import 'screens/category_and_recipe_list_pages/category_and_recipe_list_page_layouts.dart';
 import 'screens/search_page.dart';
 import 'screens/recipe_page.dart';
 
@@ -25,16 +25,21 @@ void main() async {
       GoRoute(path: '/', builder: (context, state) => const HomePage()),
       GoRoute(
           path: '/categories',
-          builder: (context, state) => const RecipeCategoryPage()),
-      GoRoute(path: '/addRecipe', builder: (context, state) => const AddRecipePage()),
+          builder: (context, state) => const CategoryPage()),
       GoRoute(
-          path: '/recipes/bysearch/:searchPattern',
-          builder: (context, state) => RecipeListBySearcbPage(
-              searchPattern: state.pathParameters['searchPattern']!)),
+          path: '/recipesList',
+          builder: (context, state) => const RecipeListPage()),
+      GoRoute(
+          path: '/addRecipe',
+          builder: (context, state) => const AddRecipePage()),
       GoRoute(
           path: '/recipes/byname/:recipeName',
           builder: (context, state) =>
               RecipePage(recipeName: state.pathParameters['recipeName']!)),
+      GoRoute(
+          path: '/recipes/bysearch/:searchPattern',
+          builder: (context, state) => RecipeListBySearcbPage(
+              searchPattern: state.pathParameters['searchPattern']!)),
     ],
   );
 

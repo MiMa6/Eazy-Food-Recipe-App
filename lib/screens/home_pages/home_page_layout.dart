@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
 import './home_page_mobile.dart';
-import './home_page_desktop.dart';
-import './home_page_tablet.dart';
 import '../../components/size_constraints.dart';
 
 class HomePage extends StatelessWidget {
@@ -14,9 +12,9 @@ class HomePage extends StatelessWidget {
       if (constraints.maxWidth < mobileBreakpoint) {
         return const HomePageMobile();
       } else if (constraints.maxWidth < tabletBreakpoint) {
-        return const HomePageTablet();
+        return const HomePageMobile();
       } else {
-        return const HomePageDesktop();
+        return const HomePageMobile();
       }
     });
   }

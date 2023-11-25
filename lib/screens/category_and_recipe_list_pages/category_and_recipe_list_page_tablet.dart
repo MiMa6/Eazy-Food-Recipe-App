@@ -6,8 +6,8 @@ import '../../widgets/recipe_lists.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../providers/category_provider.dart';
 
-class RecipeCategoryPageTablet extends ConsumerWidget {
-  const RecipeCategoryPageTablet({super.key});
+class CategoryAndRecipeListPageTablet extends ConsumerWidget {
+  const CategoryAndRecipeListPageTablet({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -39,11 +39,13 @@ class RecipeCategoryPageTablet extends ConsumerWidget {
                             constraints: const BoxConstraints(
                               maxWidth: 400,
                             ),
-                            child: const CategoryList()))
+                            child: const CategoryList(
+                              deviceType: 'tablet',
+                            )))
                   ],
                 ),
               ),
-                  // RECIPES IN CATEGORY LIST
+              // RECIPES IN CATEGORY LIST
               Expanded(
                   child: Column(
                 children: [

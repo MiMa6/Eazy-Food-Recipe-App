@@ -12,11 +12,16 @@ Eazy food app lets you find all of the most delicious repices for your preferenc
 
 In the home page you can see Featured recipe as well as hot categories. By clicking featured recipe user navigates to Recipe page for detailed information. By clicking any of Hot categoies user are direted to categories page where list of recipes can be found (+ list of categories depending on size of screen).
 
-### Categories page
+### Categories page 
 
-In this page you can see all of the categories. Choose one category and you get the list of recipes for that category. By clicking recipe you get to recipe page for detailed instructions including ingredients and how to make those delicious dices. 
+In this page you can see all of the categories. Choose one category and you get to the list of recipes for that category (Recipe list page). By clicking recipe you get to recipe page for detailed instructions including ingredients and how to make those delicious dices. 
 
-This page also includes rsponsipe design, mobilbe, tablet, desktop. For mobile versio user can see category list. For tablet and desktop versions user can see both category and selected category recipies list aside. Tablet and desktop versions got different sizing and placing of list elements
+### Recipe List Page
+
+List all of recipes by category.
+
+### Categories and Recipe List Page
+Tablet and Desktop versions use page where the content of categories and recipe list pages are combined to one page. 
 
 ### Search Page
 

@@ -7,8 +7,8 @@ import '../../components/text_and_color.dart';
 import '../../widgets/recipe_lists.dart';
 import '../../providers/category_provider.dart';
 
-class RecipeCategoryPageDesktop extends ConsumerWidget {
-  const RecipeCategoryPageDesktop({super.key});
+class CategoryAndRecipeListPageDesktop extends ConsumerWidget {
+  const CategoryAndRecipeListPageDesktop({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -23,25 +23,9 @@ class RecipeCategoryPageDesktop extends ConsumerWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              /*
               Expanded(
-                child: Column(
-                  children: [
-                    const SizedBox(height: 40),
-                    // SUBTITLE
-                    Center(
-                        child: Text(
-                      'Featured recipe',
-                      style: menuSubTitleTextStyle,
-                    ) // TextStyle(fontSize: 20))
-                        ),
-                    const SizedBox(height: 20),
-                    const FeaturedRecipeTile(),
-                  ],
-                ),
+                child: Container(),
               ),
-              */
-              Expanded(child: Container(),),
               // CATEGORY LIST
               Expanded(
                 flex: 3,
@@ -61,7 +45,9 @@ class RecipeCategoryPageDesktop extends ConsumerWidget {
                             constraints: const BoxConstraints(
                               maxWidth: 500,
                             ),
-                            child: const CategoryList()))
+                            child: const CategoryList(
+                              deviceType: 'desktop',
+                            )))
                   ],
                 ),
               ),
@@ -90,7 +76,9 @@ class RecipeCategoryPageDesktop extends ConsumerWidget {
                                   categoryName: selectedCategory)))
                     ],
                   )),
-                  Expanded(child: Container(),),
+              Expanded(
+                child: Container(),
+              ),
             ],
           ),
         )

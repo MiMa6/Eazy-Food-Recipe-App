@@ -13,21 +13,26 @@ class CategoryGrid extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final catergories = ref.watch(categoryProvider);
     //final hotCategories = categories.where(catergories => catergories.hotCategory == true).toList()
-
-    return GridView.builder(
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 1, //CHANGE responsively
-        childAspectRatio: 6 / 5,
-      ),
-      scrollDirection: Axis.horizontal,
-      itemCount: 3,
-      shrinkWrap: true,
-      itemBuilder: (context, index) {
-        return CategoryTileGrid(category: catergories[index]);
-      },
-    );
+    
+    if (catergories.isEmpty || catergories == []){
+        return const Center(child: Text("Loading...."));
+    } else {
+      return GridView.builder(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 1, //CHANGE responsively
+          childAspectRatio: 6 / 5,
+        ),
+        scrollDirection: Axis.horizontal,
+        itemCount: 3,
+        shrinkWrap: true,
+        itemBuilder: (context, index) {
+          return CategoryTileGrid(category: catergories[index]);
+        },
+      );
+    }
   }
 }
+
 
 class CategoryTileGrid extends ConsumerWidget {
   final Category category;
@@ -70,7 +75,8 @@ class CategoryTileGrid extends ConsumerWidget {
 }
 
 class CategoryList extends ConsumerWidget {
-  const CategoryList({Key? key}) : super(key: key);
+  final String deviceType;
+  const CategoryList({super.key, required this.deviceType});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -79,7 +85,8 @@ class CategoryList extends ConsumerWidget {
     return ListView.builder(
       itemCount: catergories.length,
       itemBuilder: (context, index) {
-        return CategoryTileList(category: catergories[index]);
+        return CategoryTileList(
+            category: catergories[index], deviceType: deviceType);
       },
     );
   }
@@ -87,8 +94,10 @@ class CategoryList extends ConsumerWidget {
 
 class CategoryTileList extends ConsumerWidget {
   final Category category;
+  final String deviceType;
 
-  const CategoryTileList({super.key, required this.category});
+  const CategoryTileList(
+      {super.key, required this.category, required this.deviceType});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -98,6 +107,9 @@ class CategoryTileList extends ConsumerWidget {
     return GestureDetector(
       onTap: () {
         selectedCategoryNotifier.state = category.categoryName;
+        if (deviceType == 'mobile') {
+          context.go('/recipesList');
+        }
       },
       child: Container(
         decoration: BoxDecoration(
