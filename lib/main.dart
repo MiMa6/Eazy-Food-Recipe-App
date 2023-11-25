@@ -10,6 +10,7 @@ import 'screens/home_pages/home_page_layout.dart';
 import 'screens/category_and_recipe_list_pages/category_and_recipe_list_page_layouts.dart';
 import 'screens/search_page.dart';
 import 'screens/recipe_page.dart';
+import 'screens/login_page.dart';
 
 import 'components/text_and_color.dart';
 
@@ -20,9 +21,11 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
+
   final router = GoRouter(
     routes: [
-      GoRoute(path: '/', builder: (context, state) => const HomePage()),
+      GoRoute(path: '/', builder: (context, state) =>  HomePage()),
+      GoRoute(path: '/login', builder: (context, state) =>  LoginPage()),
       GoRoute(
           path: '/categories',
           builder: (context, state) => const CategoryPage()),
@@ -40,16 +43,15 @@ void main() async {
           path: '/recipes/bysearch/:searchPattern',
           builder: (context, state) => RecipeListBySearcbPage(
               searchPattern: state.pathParameters['searchPattern']!)),
-    ],
+    ], 
   );
-
   runApp(ProviderScope(
     child: MaterialApp.router(
       routerConfig: router,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.lightBlue),
         textTheme: textThemeCustom,
-      ),
+      ),      
     ),
   ));
 }

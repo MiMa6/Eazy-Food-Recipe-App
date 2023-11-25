@@ -122,6 +122,7 @@ class _AddRecipePageState extends ConsumerState<AddRecipePage> {
                       return null;
                     },
                   ),
+                  const SizedBox(height: 30),
                   ElevatedButton(
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
