@@ -1,17 +1,71 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import '../../widgets/common_bars.dart';
 import '../providers/recipe_provider.dart';
+import '../../providers/user_provider.dart';
 import '../../components/text_and_color.dart';
 
-class AddRecipePage extends ConsumerStatefulWidget {
+class AddRecipePage extends ConsumerWidget {
   const AddRecipePage({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final asyncUser = ref.watch(userProvider);
+    return asyncUser.when(
+      data: (user) {
+        return user != null
+            ? const AddRecipePageMain()
+            : const AddRecipePageLogin();
+      },
+      error: (error, stackTrace) {
+        return const Center(child: Text("Something went wrong.."));
+      },
+      loading: () {
+        return const Center(child: Text("Loading..."));
+      },
+    );
+  }
+}
+
+class AddRecipePageLogin extends StatelessWidget {
+  const AddRecipePageLogin({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        backgroundColor: blueBackgroundColor,
+        appBar: CommonAppBarWidget(),
+        bottomNavigationBar: const CommonbottomBarWidget(),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text('Login first to create own recipes',
+                  style: menuSubTitleTextStyle),
+              const SizedBox(height: 20),
+              ElevatedButton.icon(
+                icon: const Icon(Icons.login),
+                label: const Text('Login'),
+                onPressed: () async {
+                  context.go('/login');
+                },
+              ),
+            ],
+          ),
+        ));
+  }
+}
+
+class AddRecipePageMain extends ConsumerStatefulWidget {
+  const AddRecipePageMain({super.key});
 
   @override
   _AddRecipePageState createState() => _AddRecipePageState();
 }
 
-class _AddRecipePageState extends ConsumerState<AddRecipePage> {
+class _AddRecipePageState extends ConsumerState<AddRecipePageMain> {
   final _formKey = GlobalKey<FormState>();
   final _recipeNameController = TextEditingController();
   final _ingredientsController = TextEditingController();
@@ -84,7 +138,8 @@ class _AddRecipePageState extends ConsumerState<AddRecipePage> {
                     decoration: InputDecoration(
                       labelText: 'Steps',
                       labelStyle: addRecipeStyleSearch,
-                      helperText: "Use '/' to separate steps, e.g. step1 / step2",
+                      helperText:
+                          "Use '/' to separate steps, e.g. step1 / step2",
                       helperStyle: addRecipeStyleSearchHint,
                     ),
                     validator: (value) {

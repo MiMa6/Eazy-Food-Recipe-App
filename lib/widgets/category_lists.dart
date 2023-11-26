@@ -13,9 +13,9 @@ class CategoryGrid extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final catergories = ref.watch(categoryProvider);
     //final hotCategories = categories.where(catergories => catergories.hotCategory == true).toList()
-    
-    if (catergories.isEmpty || catergories == []){
-        return const Center(child: Text("Loading...."));
+
+    if (catergories.isEmpty || catergories == []) {
+      return const Center(child: Text("Loading...."));
     } else {
       return GridView.builder(
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -33,7 +33,6 @@ class CategoryGrid extends ConsumerWidget {
   }
 }
 
-
 class CategoryTileGrid extends ConsumerWidget {
   final Category category;
 
@@ -43,13 +42,9 @@ class CategoryTileGrid extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final selectedCategoryNotifier =
         ref.watch(selectedCategoryProvider.notifier);
-    final searchedCategoryNotifier =
-        ref.watch(searchedCategoryProvider.notifier);
-
     return GestureDetector(
       onTap: () {
         selectedCategoryNotifier.state = category.categoryName;
-        searchedCategoryNotifier.state = '';
         context.go('/categories');
       },
       child: Container(
@@ -62,7 +57,6 @@ class CategoryTileGrid extends ConsumerWidget {
           children: [
             Text(category.categoryName,
                 style: GoogleFonts.yujiBoku(fontSize: 20)),
-            Text('list2', style: GoogleFonts.yujiBoku(fontSize: 20)),
             // PICTURE PLACEHOLDER
             const Placeholder(
               fallbackHeight: 100,

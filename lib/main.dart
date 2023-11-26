@@ -21,11 +21,10 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-
   final router = GoRouter(
     routes: [
-      GoRoute(path: '/', builder: (context, state) =>  HomePage()),
-      GoRoute(path: '/login', builder: (context, state) =>  LoginPage()),
+      GoRoute(path: '/', builder: (context, state) => const HomePage()),
+      GoRoute(path: '/login', builder: (context, state) => const LoginPage()),
       GoRoute(
           path: '/categories',
           builder: (context, state) => const CategoryPage()),
@@ -43,7 +42,7 @@ void main() async {
           path: '/recipes/bysearch/:searchPattern',
           builder: (context, state) => RecipeListBySearcbPage(
               searchPattern: state.pathParameters['searchPattern']!)),
-    ], 
+    ],
   );
   runApp(ProviderScope(
     child: MaterialApp.router(
@@ -51,7 +50,7 @@ void main() async {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.lightBlue),
         textTheme: textThemeCustom,
-      ),      
+      ),
     ),
   ));
 }
