@@ -2,8 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:recipe_app/providers/user_provider.dart';
+import 'package:recipe_app/widgets/favorite_widgets.dart';
 import '../providers/recipe_provider.dart';
 import '../../models/recipe.dart';
+import 'favorite_widgets.dart';
+
+// TODO: FIX BAD STATE NO ELEMENT
 
 class RecipeTileDetailed extends StatelessWidget {
   final Recipe recipe;
@@ -32,7 +37,17 @@ class RecipeTileDetailed extends StatelessWidget {
                 ),
             Text(recipe.picture, style: GoogleFonts.yujiBoku(fontSize: 10)),
             const Placeholder(
-              fallbackHeight: 287,
+              fallbackHeight: 245,
+            ),
+            const SizedBox(height: 10),
+            Row(
+              children: [
+                Expanded(child: Center(child: FavouriteWidget(recipe: recipe))),
+                Expanded(
+                    child: DeleteWidget(
+                  recipe: recipe,
+                )),
+              ],
             ),
           ],
         ),
@@ -41,15 +56,13 @@ class RecipeTileDetailed extends StatelessWidget {
   }
 }
 
-class RecipeTile extends ConsumerWidget {
+class RecipeTile extends StatelessWidget {
   final Recipe recipe;
 
   const RecipeTile({super.key, required this.recipe});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final recipeProviderNotifier = ref.watch(recipeProvider.notifier);
-
+  Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
         color: Colors.blue[100],
@@ -63,22 +76,17 @@ class RecipeTile extends ConsumerWidget {
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
             tileColor: Colors.blue[100],
-            leading: const Icon(Icons.favorite_outline),
             title: GestureDetector(
               child: Text(recipe.recipeName,
-                  style: GoogleFonts.yujiBoku(fontSize: 20)
-                  //style: GoogleFonts.alice(fontSize: 15, color: Colors.white)
-                  ),
+                  style: GoogleFonts.yujiBoku(fontSize: 20)),
               onTap: () {
                 context.go('/recipes/byname/${recipe.recipeName}');
               },
             ),
-            trailing: GestureDetector(
-              child: const Icon(Icons.delete),
-              onTap: () {
-                recipeProviderNotifier.deleteRecipe(recipe.recipeId);
-              },
+            leading: FavouriteWidget(
+              recipe: recipe,
             ),
+            trailing: DeleteWidget(recipe: recipe),
           )
         ],
       ),
@@ -94,42 +102,44 @@ class FeaturedRecipeTile extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final recipe = ref.watch(recipeProvider);
-    if (recipe.isEmpty || recipe == []){
-        return const Center(child: Text("Loading...."));
-    } else {
-    final featuredRecipe =
-        recipe.where((recipe) => recipe.recipeName == "Vegan Lasagna").first;
 
-    return GestureDetector(
-      onTap: () {
-        context.go('/recipes/byname/${featuredRecipe.recipeName}');
-      },
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.blue[100],
-          borderRadius: BorderRadius.circular(20),
+    if (recipe.isEmpty || recipe == []) {
+      return const Center(child: Text("Loading...."));
+    } else {
+      final featuredRecipe = recipe
+          .where((recipe) => recipe.recipeName == "Margherita Pizza")
+          .first;
+
+      return GestureDetector(
+        onTap: () {
+          context.go('/recipes/byname/${featuredRecipe.recipeName}');
+        },
+        child: Container(
+          decoration: BoxDecoration(
+            color: Colors.blue[100],
+            borderRadius: BorderRadius.circular(20),
+          ),
+          margin: const EdgeInsets.all(25),
+          width: 250,
+          height: 250,
+          child: Column(
+            children: [
+              Text(featuredRecipe.recipeName,
+                  //exampleFeaturedRecipe.recipeName,
+                  style: GoogleFonts.yujiBoku(fontSize: 20)),
+              Text(featuredRecipe.picture,
+                  //exampleFeaturedRecipe.picture[0],
+                  style: GoogleFonts.yujiBoku(fontSize: 10)),
+              const Placeholder(
+                fallbackHeight: 100,
+              ),
+              Text(featuredRecipe.category,
+                  //exampleFeaturedRecipe.recipeName,
+                  style: GoogleFonts.yujiBoku(fontSize: 15)),
+            ],
+          ),
         ),
-        margin: const EdgeInsets.all(25),
-        width: 250,
-        height: 250,
-        child: Column(
-          children: [
-            Text(featuredRecipe.recipeName,
-                //exampleFeaturedRecipe.recipeName,
-                style: GoogleFonts.yujiBoku(fontSize: 20)),
-            Text(featuredRecipe.category,
-                //exampleFeaturedRecipe.recipeName,
-                style: GoogleFonts.yujiBoku(fontSize: 10)),
-            Text(featuredRecipe.picture,
-                //exampleFeaturedRecipe.picture[0],
-                style: GoogleFonts.yujiBoku(fontSize: 10)),
-            const Placeholder(
-              fallbackHeight: 100,
-            ),
-          ],
-        ),
-      ),
-    );
+      );
     }
   }
 }

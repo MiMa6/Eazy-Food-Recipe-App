@@ -5,6 +5,8 @@ class Recipe {
   List<String> recipeSteps;
   String picture;
   String category;
+  String userId;
+  List<String> favouriteUserIds;
 
   Recipe({
     required this.recipeId,
@@ -13,7 +15,31 @@ class Recipe {
     required this.recipeSteps,
     required this.picture,
     required this.category,
+    required this.userId,
+    required this.favouriteUserIds,
   });
+
+  Recipe copyWith({
+    String? recipeId,
+    String? recipeName,
+    List<String>? ingredients,
+    List<String>? recipeSteps,
+    String? picture,
+    String? category,
+    String? userId,
+    List<String>? favouriteUserIds,
+  }) {
+    return Recipe(
+      recipeId: recipeId ?? this.recipeId,
+      recipeName: recipeName ?? this.recipeName,
+      ingredients: ingredients ?? this.ingredients,
+      recipeSteps: recipeSteps ?? this.recipeSteps,
+      picture: picture ?? this.picture,
+      category: category ?? this.category,
+      userId: userId ?? this.userId,
+      favouriteUserIds: favouriteUserIds ?? this.favouriteUserIds,
+    );
+  }
 
   factory Recipe.fromFirestore(Map<String, dynamic> data, String id) {
     return Recipe(
@@ -23,6 +49,8 @@ class Recipe {
       recipeSteps: List<String>.from(data['recipeSteps']),
       picture: data['picture'],
       category: data['category'],
+      userId: data['userId'],
+      favouriteUserIds: List<String>.from(data['favouriteUserIds']),
     );
   }
 
@@ -33,6 +61,8 @@ class Recipe {
       'recipeSteps': recipeSteps,
       'picture': picture,
       'category': category,
+      'userId': userId,
+      'favouriteUserIds': favouriteUserIds,
     };
   }
 }
@@ -44,4 +74,6 @@ Recipe exampleFeaturedRecipe = Recipe(
   recipeSteps: ["do, eat"],
   picture: 'pic 1',
   category: 'featured recipe',
+  userId: 'everyone',
+  favouriteUserIds: [],
 );

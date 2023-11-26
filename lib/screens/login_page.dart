@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import '../../providers/user_provider.dart';
-import 'package:go_router/go_router.dart';
 import '../components/text_and_color.dart';
 import '../widgets/common_bars.dart';
 
 class LoginPage extends ConsumerWidget {
+  const LoginPage({super.key});
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final asyncUser = ref.watch(userProvider);
     return Scaffold(
       appBar: CommonAppBarWidget(),
+      bottomNavigationBar: const CommonbottomBarWidget(),
       backgroundColor: blueBackgroundColor,
       body: Center(
         child: Column(
@@ -36,8 +40,12 @@ class LoginPage extends ConsumerWidget {
                       )
                     : Column(
                         children: [
-                          Text('Login to Eazy Food anonymously',
+                          Text('You are currently logged out',
                               style: menuSubTitleTextStyle),
+                          const SizedBox(height: 10),
+                          Text(
+                              'Press login to create, delete and add favourite recipes',
+                              style: hintTextStyle),
                           const SizedBox(height: 40),
                           ElevatedButton.icon(
                             icon: const Icon(Icons.login),

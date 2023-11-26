@@ -6,6 +6,7 @@ import '../widgets/recipe_tiles.dart';
 import '../components/text_and_color.dart';
 import '../providers/recipe_provider.dart';
 
+// TODO: no element when refreshing page
 class RecipePage extends ConsumerWidget {
   const RecipePage({super.key, required this.recipeName});
   final String recipeName;
@@ -13,6 +14,7 @@ class RecipePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final recipe = ref.watch(recipeProvider);
+
     final recipeToShow =
         recipe.where((recipe) => recipe.recipeName == recipeName).first;
 
@@ -22,8 +24,7 @@ class RecipePage extends ConsumerWidget {
         child: Container(
           color: const Color.fromARGB(255, 27, 139, 164),
           child: SingleChildScrollView(
-            child: Column(
-              children: [
+            child: Column(children: [
               const SizedBox(height: 20),
 
               // RECEIPE
@@ -48,7 +49,7 @@ class RecipePage extends ConsumerWidget {
                 itemBuilder: (context, index) {
                   return Center(
                       child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(5.0),
                     child: Text(
                       recipeToShow.ingredients[index],
                       style: foodTextStyle,
@@ -72,12 +73,12 @@ class RecipePage extends ConsumerWidget {
               Container(
                 constraints: const BoxConstraints(maxWidth: 600),
                 child: Center(
-                  child: ListView.builder(
+                    child: ListView.builder(
                   shrinkWrap: true,
                   itemCount: recipeToShow.recipeSteps.length,
                   itemBuilder: (context, index) {
                     return Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.all(5.0),
                       child: Text(
                         '(${index + 1}) - ${recipeToShow.recipeSteps[index]}',
                         style: foodTextStyle,

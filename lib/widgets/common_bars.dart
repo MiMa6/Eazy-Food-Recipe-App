@@ -21,37 +21,41 @@ class CommonAppBarWidget extends AppBar {
                 ),
               ),
               Expanded(
-                flex: 1,
+                  flex: 1,
                   child: Center(
-                child: Container(
-                    constraints: const BoxConstraints(maxWidth: 300),
-                    child: const SearchRecipeBarWidget()),
-              )),
-              GoLoginPageWidget(),
+                    child: Container(
+                        constraints: const BoxConstraints(maxWidth: 300),
+                        child: const SearchRecipeBarWidget()),
+                  )),
+              const GoLoginPageWidget(),
             ],
           ),
         );
 }
 
 class GoLoginPageWidget extends ConsumerWidget {
+  const GoLoginPageWidget({super.key});
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-
     return Row(
       children: [
         Center(
-            child: IconButton(
-              icon: Icon(Icons.login, color: Colors.white,),
-              onPressed: () {
-                context.go('/login');
-              },
-              
+          child: IconButton(
+            icon: const Icon(
+              Icons.login,
+              color: Colors.white,
             ),
+            onPressed: () {
+              context.go('/login');
+            },
+          ),
         ),
       ],
     );
   }
 }
+
 class SearchRecipeBarWidget extends ConsumerWidget {
   const SearchRecipeBarWidget({super.key});
 
@@ -84,8 +88,6 @@ class CommonbottomBarWidget extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final selectedCategoryNotifier =
         ref.watch(selectedCategoryProvider.notifier);
-    final searchedCategoryNotifier =
-        ref.watch(searchedCategoryProvider.notifier);
 
     return BottomNavigationBar(
       items: const <BottomNavigationBarItem>[
@@ -108,7 +110,6 @@ class CommonbottomBarWidget extends ConsumerWidget {
           context.go('/');
         } else if (value == 1) {
           selectedCategoryNotifier.state = '';
-          searchedCategoryNotifier.state = '';
           context.go('/categories');
         } else if (value == 2) {
           context.go('/addRecipe');
