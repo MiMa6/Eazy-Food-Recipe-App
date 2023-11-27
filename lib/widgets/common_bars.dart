@@ -101,9 +101,10 @@ class CommonbottomBarWidget extends ConsumerWidget {
             label: 'Categories',
             backgroundColor: Colors.brown),
         BottomNavigationBarItem(
-            icon: Icon(Icons.add, color: Colors.brown),
-            label: 'Add Recipe',
+            icon: Icon(Icons.bookmarks, color: Colors.brown),
+            label: 'My Recipes',
             backgroundColor: Colors.brown),
+
       ],
       onTap: (value) {
         if (value == 0) {

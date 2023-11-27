@@ -2,13 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:recipe_app/providers/user_provider.dart';
 import 'package:recipe_app/widgets/favorite_widgets.dart';
 import '../providers/recipe_provider.dart';
 import '../../models/recipe.dart';
-import 'favorite_widgets.dart';
 
-// TODO: FIX BAD STATE NO ELEMENT
+// TODO: no element when refreshing tile
 
 class RecipeTileDetailed extends StatelessWidget {
   final Recipe recipe;
@@ -68,7 +66,7 @@ class RecipeTile extends StatelessWidget {
         color: Colors.blue[100],
         borderRadius: BorderRadius.circular(20),
       ),
-      margin: const EdgeInsets.all(10),
+      margin: const EdgeInsets.all(5),
       child: Column(
         children: [
           ListTile(

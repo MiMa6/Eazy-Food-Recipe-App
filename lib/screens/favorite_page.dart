@@ -3,9 +3,8 @@ import '../widgets/common_bars.dart';
 import '../components/text_and_color.dart';
 import '../widgets/recipe_lists.dart';
 
-class RecipeListBySearcbPage extends StatelessWidget {
-  const RecipeListBySearcbPage({super.key, required this.searchPattern});
-  final String searchPattern;
+class FavoriteRecipePage extends StatelessWidget {
+  const FavoriteRecipePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,18 +18,19 @@ class RecipeListBySearcbPage extends StatelessWidget {
           // TITLE
           Center(
               child: Text(
-            'Recipes by search',
+            'Favorite Recipes',
             style: menuSubTitleTextStyle,
-          )),
+          ) 
+              ),
 
           const SizedBox(height: 20),
 
-          Expanded(
-              child: Container(
-                  constraints: const BoxConstraints(
-                    maxWidth: 400,
-                  ),
-                  child: RecipeListSearch(searchPattern: searchPattern))),
+          Expanded(child: 
+            Container(
+              constraints: const BoxConstraints(maxWidth: 400,),
+              child: const RecipeListFavorite()
+            )
+          ),
           const SizedBox(height: 20),
         ]),
       ),

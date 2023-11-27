@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:recipe_app/providers/user_provider.dart';
@@ -16,7 +15,6 @@ class FavouriteWidget extends ConsumerWidget {
     final recipeProviderNotifier = ref.watch(recipeProvider.notifier);
     final asyncUser = ref.watch(userProvider);
 
-    //Text(recipe.favouriteUserIds.length.toString()),
     // ADD & DELETE FAVOURITE RECIPE
     return asyncUser.when(data: (user) {
       if (user != null) {
@@ -74,13 +72,13 @@ class DeleteWidget extends ConsumerWidget {
             },
           );
         }
-        return Text("");
+        return const Text("");
       }
-      return Text("");
+      return const Text("");
     }, loading: () {
-      return Text("");
+      return const Text("");
     }, error: (error, stackTrace) {
-      return Text("");
+      return const Text("");
     });
   }
 }

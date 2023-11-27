@@ -7,8 +7,8 @@ import '../providers/recipe_provider.dart';
 import '../../providers/user_provider.dart';
 import '../../components/text_and_color.dart';
 
-class AddRecipePage extends ConsumerWidget {
-  const AddRecipePage({super.key});
+class MyRecipePage extends ConsumerWidget {
+  const MyRecipePage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -16,8 +16,8 @@ class AddRecipePage extends ConsumerWidget {
     return asyncUser.when(
       data: (user) {
         return user != null
-            ? const AddRecipePageMain()
-            : const AddRecipePageLogin();
+            ? MyRecipePageMain(userUid: user.uid)
+            : const MyRecipePageLogin();
       },
       error: (error, stackTrace) {
         return const Center(child: Text("Something went wrong.."));
@@ -29,8 +29,8 @@ class AddRecipePage extends ConsumerWidget {
   }
 }
 
-class AddRecipePageLogin extends StatelessWidget {
-  const AddRecipePageLogin({super.key});
+class MyRecipePageLogin extends StatelessWidget {
+  const MyRecipePageLogin({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +42,7 @@ class AddRecipePageLogin extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text('Login first to create own recipes',
+              Text('Log in to create recipes and add favorites',
                   style: menuSubTitleTextStyle),
               const SizedBox(height: 20),
               ElevatedButton.icon(
@@ -58,14 +58,15 @@ class AddRecipePageLogin extends StatelessWidget {
   }
 }
 
-class AddRecipePageMain extends ConsumerStatefulWidget {
-  const AddRecipePageMain({super.key});
+class MyRecipePageMain extends ConsumerStatefulWidget {
+  final String userUid;
+  const MyRecipePageMain({super.key, required this.userUid});
 
   @override
-  _AddRecipePageState createState() => _AddRecipePageState();
+  _MyRecipePageState createState() => _MyRecipePageState();
 }
 
-class _AddRecipePageState extends ConsumerState<AddRecipePageMain> {
+class _MyRecipePageState extends ConsumerState<MyRecipePageMain> {
   final _formKey = GlobalKey<FormState>();
   final _recipeNameController = TextEditingController();
   final _ingredientsController = TextEditingController();
@@ -97,6 +98,13 @@ class _AddRecipePageState extends ConsumerState<AddRecipePageMain> {
               ),
               child: Column(
                 children: [
+                  const SizedBox(height: 20),
+                  // TITLE
+                  Center(
+                      child: Text(
+                    'Add Recipe',
+                    style: menuSubTitleTextStyle,
+                  )),
                   const SizedBox(height: 30),
                   TextFormField(
                     controller: _recipeNameController,
@@ -190,7 +198,21 @@ class _AddRecipePageState extends ConsumerState<AddRecipePageMain> {
                         _cleanControllers();
                       }
                     },
-                    child: const Text('Submit'),
+                    child: const Text('Submit =>'),
+                  ),
+                  const SizedBox(height: 40),
+                  // TITLE
+                  Center(
+                      child: Text(
+                    'Favorite Recipes',
+                    style: menuSubTitleTextStyle,
+                  )),
+                  const SizedBox(height: 20),
+                  ElevatedButton(
+                    onPressed: () {
+                      context.go('/favoriteRecipe');
+                    },
+                    child: const Text('Go Favorites <3'),
                   ),
                 ],
               ),
