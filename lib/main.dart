@@ -1,5 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
-import 'package:recipe_app/screens/add_recipe_page.dart';
+import 'package:recipe_app/screens/my_recipe_page.dart';
 import 'firebase_options.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -11,9 +11,11 @@ import 'screens/category_and_recipe_list_pages/category_and_recipe_list_page_lay
 import 'screens/search_page.dart';
 import 'screens/recipe_page.dart';
 import 'screens/login_page.dart';
+import 'screens/favorite_page.dart';
 
 import 'components/text_and_color.dart';
 
+// TODO: Responsiveness (search + add) recipes page (ingredients and steps)
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -33,7 +35,10 @@ void main() async {
           builder: (context, state) => const RecipeListPage()),
       GoRoute(
           path: '/addRecipe',
-          builder: (context, state) => const AddRecipePage()),
+          builder: (context, state) => const MyRecipePage()),
+      GoRoute(
+          path: '/favoriteRecipe',
+          builder: (context, state) => const FavoriteRecipePage()),
       GoRoute(
           path: '/recipes/byname/:recipeName',
           builder: (context, state) =>

@@ -20,7 +20,7 @@ class RecipeListPageMobile extends ConsumerWidget {
       body: Column(children: [
         const SizedBox(height: 40),
 
-        // SUBTITLE
+        // TITLE
         Center(
             child: Text(
           pageTitle,

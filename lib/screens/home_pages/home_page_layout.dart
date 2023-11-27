@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import './home_page_mobile.dart';
 import '../../components/size_constraints.dart';
 
-// TODO: FIX bottom overflow
+// TODO: FIX bottom overflow when small screen
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
