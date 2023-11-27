@@ -39,8 +39,8 @@ class CategoryAndRecipeListPageTablet extends ConsumerWidget {
                             constraints: const BoxConstraints(
                               maxWidth: 400,
                             ),
-                            child: const CategoryList(
-                              deviceType: 'tablet',
+                            child: const CategoryListSmooth(
+                              layoutType: 'tablet',
                             )))
                   ],
                 ),
@@ -65,7 +65,7 @@ class CategoryAndRecipeListPageTablet extends ConsumerWidget {
                           constraints: const BoxConstraints(
                             maxWidth: 400,
                           ),
-                          child: RecipeListCategory(
+                          child: RecipeListByCategorySmooth(
                               categoryName: selectedCategory)))
                 ],
               )),

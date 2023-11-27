@@ -11,12 +11,12 @@ class CategoryNotifier extends StateNotifier<List<Category>> {
 
   void _fetchCategories() async {
     final snapshot = await _firestore.collection('categories').get();
-    
+
     // For debugging purposes
     /*for (var doc in snapshot.docs) {
       print('Categories from firestore: ${doc.id}: ${doc.data()}');
     }*/
-    
+
     final categories = snapshot.docs
         .map((doc) => Category.fromFirestore(doc.data(), doc.id))
         .toList();
@@ -30,4 +30,3 @@ final categoryProvider =
 
 final selectedCategoryProvider = StateProvider<String>((ref) => '');
 final searchedCategoryProvider = StateProvider<String>((ref) => '');
-//final selectedCategoryProvider = StateProvider<String>((ref) => ref.watch(categoryProvider).first.categoryName)

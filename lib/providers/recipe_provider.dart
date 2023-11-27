@@ -3,8 +3,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import '../providers/user_provider.dart';
 import '../models/recipe.dart';
 
+// TODO: pagination queries
 class RecipeNotifier extends StateNotifier<List<Recipe>> {
   final String userId;
+  DocumentSnapshot? lastDocument;
 
   RecipeNotifier({required this.userId}) : super([]) {
     _fetchRecipes();
@@ -79,12 +81,6 @@ class RecipeNotifier extends StateNotifier<List<Recipe>> {
     }).catchError((error) {
       print("Failed to add favourite: $error");
     });
-  }
-
-  Future<int> countFavourite(String recipeId) async {
-    final snapshot = await _firestore.collection('recipes').doc(recipeId).get();
-    final recipe = Recipe.fromFirestore(snapshot.data()!, snapshot.id);
-    return recipe.favouriteUserIds.length;
   }
 
   void deleteRecipe(String recipeId) {

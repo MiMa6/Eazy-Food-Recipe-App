@@ -20,17 +20,16 @@ class FavoriteRecipePage extends StatelessWidget {
               child: Text(
             'Favorite Recipes',
             style: menuSubTitleTextStyle,
-          ) 
-              ),
+          )),
 
           const SizedBox(height: 20),
 
-          Expanded(child: 
-            Container(
-              constraints: const BoxConstraints(maxWidth: 400,),
-              child: const RecipeListFavorite()
-            )
-          ),
+          Expanded(
+              child: Container(
+                  constraints: const BoxConstraints(
+                    maxWidth: 400,
+                  ),
+                  child: const RecipeListByFavorite())),
           const SizedBox(height: 20),
         ]),
       ),

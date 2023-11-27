@@ -6,8 +6,8 @@ import '../../widgets/recipe_tiles.dart';
 
 import '../../components/text_and_color.dart';
 
-class HomePageMobile extends StatelessWidget {
-  const HomePageMobile({Key? key}) : super(key: key);
+class HomePageMobileAndTablet extends StatelessWidget {
+  const HomePageMobileAndTablet({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -50,17 +50,11 @@ class HomePageMobile extends StatelessWidget {
           style: menuSubTitleTextStyle,
         )),
 
-        const SizedBox(height: 10),
-        // USER HINT
-        //Center(child: Text(
-        //  'Swipe',
-        //  style: hintTextStyle)
-        //),
-
-        const SizedBox(height: 10),
+        const SizedBox(height: 20),
 
         // CATEGORIES
-        const Expanded(child: Center(child: CategoryGrid())),
+        const Expanded(
+            child: Center(child: CategoryGrid(layoutType: "mobile"))),
       ]),
       bottomNavigationBar: const CommonbottomBarWidget(),
     );

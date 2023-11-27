@@ -45,8 +45,8 @@ class CategoryAndRecipeListPageDesktop extends ConsumerWidget {
                             constraints: const BoxConstraints(
                               maxWidth: 500,
                             ),
-                            child: const CategoryList(
-                              deviceType: 'desktop',
+                            child: const CategoryListSmooth(
+                              layoutType: 'desktop',
                             )))
                   ],
                 ),
@@ -72,7 +72,7 @@ class CategoryAndRecipeListPageDesktop extends ConsumerWidget {
                               constraints: const BoxConstraints(
                                 maxWidth: 500,
                               ),
-                              child: RecipeListCategory(
+                              child: RecipeListByCategorySmooth(
                                   categoryName: selectedCategory)))
                     ],
                   )),

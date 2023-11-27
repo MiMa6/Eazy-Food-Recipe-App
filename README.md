@@ -56,3 +56,4 @@ These are common elements that are shown in every page of app. In app bar you se
 * firebase_core: ^2.23.0
 * cloud_firestore: ^4.13.2
 * firebase_auth: ^4.14.1
+* firebase_ui_firestore: ^1.5.14

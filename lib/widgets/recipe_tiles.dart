@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:recipe_app/widgets/favorite_widgets.dart';
+import 'package:recipe_app/widgets/favorite_widget.dart';
+import 'package:recipe_app/widgets/delete_widget.dart';
 import '../providers/recipe_provider.dart';
 import '../../models/recipe.dart';
+import '../components/recipe_selection_home.dart';
 
 // TODO: no element when refreshing tile
 
@@ -105,7 +107,7 @@ class FeaturedRecipeTile extends ConsumerWidget {
       return const Center(child: Text("Loading...."));
     } else {
       final featuredRecipe = recipe
-          .where((recipe) => recipe.recipeName == "Margherita Pizza")
+          .where((recipe) => recipe.recipeName == featuredRecipeName)
           .first;
 
       return GestureDetector(

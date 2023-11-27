@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import './home_page_mobile.dart';
+import 'home_page_mobile_and_tablet.dart';
+import 'home_page_desktop.dart';
 import '../../components/size_constraints.dart';
 
 // TODO: FIX bottom overflow when small screen
@@ -10,11 +11,11 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraints) {
       if (constraints.maxWidth < mobileBreakpoint) {
-        return const HomePageMobile();
+        return const HomePageMobileAndTablet();
       } else if (constraints.maxWidth < tabletBreakpoint) {
-        return const HomePageMobile();
+        return const HomePageMobileAndTablet();
       } else {
-        return const HomePageMobile();
+        return const HomePageDesktop();
       }
     });
   }
