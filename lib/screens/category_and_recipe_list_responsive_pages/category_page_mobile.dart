@@ -32,7 +32,7 @@ class CategoryPageMobile extends StatelessWidget {
                 constraints: const BoxConstraints(
                   maxWidth: 400,
                 ),
-                child: const CategoryList(deviceType: 'mobile')))
+                child: const CategoryListSmooth(layoutType: 'mobile')))
       ]),
       bottomNavigationBar: const CommonbottomBarWidget(),
     );

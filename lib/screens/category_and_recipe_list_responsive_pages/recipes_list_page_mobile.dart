@@ -36,7 +36,8 @@ class RecipeListPageMobile extends ConsumerWidget {
                 constraints: const BoxConstraints(
                   maxWidth: 400,
                 ),
-                child: RecipeListCategory(categoryName: selectedCategory)))
+                child:
+                    RecipeListByCategorySmooth(categoryName: selectedCategory)))
       ]),
       bottomNavigationBar: const CommonbottomBarWidget(),
     );

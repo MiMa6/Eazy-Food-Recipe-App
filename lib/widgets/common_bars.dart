@@ -104,7 +104,6 @@ class CommonbottomBarWidget extends ConsumerWidget {
             icon: Icon(Icons.bookmarks, color: Colors.brown),
             label: 'My Recipes',
             backgroundColor: Colors.brown),
-
       ],
       onTap: (value) {
         if (value == 0) {

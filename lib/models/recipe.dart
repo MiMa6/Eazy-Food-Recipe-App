@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class Recipe {
   String recipeId;
   String recipeName;
@@ -53,7 +55,18 @@ class Recipe {
       favouriteUserIds: List<String>.from(data['favouriteUserIds']),
     );
   }
-
+  factory Recipe.fromDocument(DocumentSnapshot doc, String id) {
+    return Recipe(
+      recipeId: id,
+      recipeName: doc['recipeName'],
+      ingredients: List<String>.from(doc['ingredients']),
+      recipeSteps: List<String>.from(doc['recipeSteps']),
+      picture: doc['picture'],
+      category: doc['category'],
+      userId: doc['userId'],
+      favouriteUserIds: List<String>.from(doc['favouriteUserIds']),
+    );
+  }
   Map<String, dynamic> toFirestore() {
     return {
       'recipeName': recipeName,
@@ -66,14 +79,3 @@ class Recipe {
     };
   }
 }
-
-Recipe exampleFeaturedRecipe = Recipe(
-  recipeId: '111',
-  recipeName: 'Makarooni Hässäkkä',
-  ingredients: ["air, water"],
-  recipeSteps: ["do, eat"],
-  picture: 'pic 1',
-  category: 'featured recipe',
-  userId: 'everyone',
-  favouriteUserIds: [],
-);

@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../widgets/common_bars.dart';
-import '../widgets/recipe_tiles.dart';
-import '../components/text_and_color.dart';
-import '../providers/recipe_provider.dart';
+import '../../widgets/common_bars.dart';
+import '../../widgets/recipe_tiles.dart';
+import '../../components/text_and_color.dart';
+import '../../providers/recipe_provider.dart';
 
-// TODO: no element when refreshing page
-class RecipePage extends ConsumerWidget {
-  const RecipePage({super.key, required this.recipeName});
+class RecipePageMobile extends ConsumerWidget {
+  const RecipePageMobile({super.key, required this.recipeName});
   final String recipeName;
 
   @override

@@ -1,5 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
-import 'package:recipe_app/screens/my_recipe_page.dart';
+import 'package:recipe_app/screens/my_recipes_page.dart';
 import 'firebase_options.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -7,15 +7,14 @@ import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 
 import 'screens/home_pages/home_page_layout.dart';
-import 'screens/category_and_recipe_list_pages/category_and_recipe_list_page_layouts.dart';
+import 'screens/detailed_recipe_responsive_pages.dart/detailed_recipe_page_layouts.dart';
+import 'screens/category_and_recipe_list_responsive_pages/category_and_recipe_list_page_layouts.dart';
 import 'screens/search_page.dart';
-import 'screens/recipe_page.dart';
 import 'screens/login_page.dart';
 import 'screens/favorite_page.dart';
 
 import 'components/text_and_color.dart';
 
-// TODO: Responsiveness (search + add) recipes page (ingredients and steps)
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 

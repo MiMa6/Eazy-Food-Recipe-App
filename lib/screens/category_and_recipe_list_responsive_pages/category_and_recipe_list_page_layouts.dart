@@ -7,7 +7,6 @@ import 'category_and_recipe_list_page_desktop.dart';
 import 'category_page_mobile.dart';
 import '../../components/size_constraints.dart';
 
-// TODO: Smooth scrolling for recipe list and category pages
 class CategoryPage extends StatelessWidget {
   const CategoryPage({super.key});
 

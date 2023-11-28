@@ -30,7 +30,7 @@ class RecipeListBySearcbPage extends StatelessWidget {
                   constraints: const BoxConstraints(
                     maxWidth: 400,
                   ),
-                  child: RecipeListSearch(searchPattern: searchPattern))),
+                  child: RecipeListBySearch(searchPattern: searchPattern))),
           const SizedBox(height: 20),
         ]),
       ),

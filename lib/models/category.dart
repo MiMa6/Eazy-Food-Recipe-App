@@ -17,36 +17,3 @@ class Category {
     );
   }
 }
-
-List<Category> exampleCategories = [
-  Category(
-    categoryId: "1",
-    categoryName: "Fish",
-    picture: "Picture 1",
-  ),
-  Category(
-    categoryId: "2",
-    categoryName: "kebab",
-    picture: "Picture 1",
-  ),
-  Category(
-    categoryId: "3",
-    categoryName: "pizza",
-    picture: "Picture 1",
-  ),
-  Category(
-    categoryId: "4",
-    categoryName: "Hamburger",
-    picture: "Picture 1",
-  ),
-  Category(
-    categoryId: "5",
-    categoryName: "Sushi",
-    picture: "Picture 1",
-  ),
-  Category(
-    categoryId: "6",
-    categoryName: "Random",
-    picture: "Picture 1",
-  ),
-];

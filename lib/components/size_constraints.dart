@@ -1,4 +1,3 @@
-
 // LAYOUTS
 const int mobileBreakpoint = 550;
 const int tabletBreakpoint = 1150;

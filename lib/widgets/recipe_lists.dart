@@ -1,69 +1,60 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:recipe_app/widgets/recipe_tiles.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_ui_firestore/firebase_ui_firestore.dart';
+
 import '../providers/recipe_provider.dart';
 import '../providers/user_provider.dart';
 import '../components/text_and_color.dart';
+import '../models/recipe.dart';
 
-class RecipeListCategory extends ConsumerWidget {
+class RecipeListByCategorySmooth extends ConsumerWidget {
   final String categoryName;
-
-  const RecipeListCategory({super.key, required this.categoryName});
+  const RecipeListByCategorySmooth({super.key, required this.categoryName});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final recipes = ref.watch(recipeProvider);
+    final recipesQuery = FirebaseFirestore.instance
+        .collection('recipes')
+        .where('category', isEqualTo: categoryName)
+        .orderBy('recipeName');
 
-    final recipesByCategory =
-        recipes.where((recipe) => recipe.category == categoryName).toList();
-
-    return ListView.builder(
-      itemCount: recipesByCategory.length,
-      itemBuilder: (context, index) {
-        return RecipeTile(recipe: recipesByCategory[index]);
+    return FutureBuilder<QuerySnapshot>(
+      future: recipesQuery.get(),
+      builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(child: CircularProgressIndicator());
+        } else if (snapshot.hasError) {
+          print("Error: ${snapshot.error}");
+          return Text("Error: ${snapshot.error}");
+        } else if (snapshot.data!.docs.isEmpty) {
+          return Center(
+              child: (categoryName == "")
+                  ? const Text("")
+                  : Text("No recipes found by '$categoryName'",
+                      style: menuSubTitleTextStyle));
+        } else {
+          return FirestoreListView<Map<String, dynamic>>(
+            pageSize: 20,
+            query: recipesQuery,
+            itemBuilder: (context, snapshot) {
+              final recipe = Recipe.fromFirestore(snapshot.data(), snapshot.id);
+              return RecipeTile(recipe: recipe);
+            },
+          );
+        }
       },
     );
   }
 }
 
-class RecipeListSearch extends ConsumerWidget {
-  final String searchPattern;
-
-  const RecipeListSearch({super.key, required this.searchPattern});
+class RecipeListByFavorite extends ConsumerWidget {
+  const RecipeListByFavorite({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final recipes = ref.watch(recipeProvider);
-
-    final recipesBsearchCategory = recipes
-        .where((recipe) => recipe.recipeName
-            .toLowerCase()
-            .contains(searchPattern.toLowerCase()))
-        .toList();
-
-    if (recipesBsearchCategory.isEmpty) {
-      return Center(
-          child: Text(
-        "No recipes found by '$searchPattern'",
-        style: menuSubTitleTextStyle,
-      ));
-    }
-    return ListView.builder(
-      itemCount: recipesBsearchCategory.length,
-      itemBuilder: (context, index) {
-        return RecipeTile(recipe: recipesBsearchCategory[index]);
-      },
-    );
-  }
-}
-
-class RecipeListFavorite extends ConsumerWidget {
-
-  const RecipeListFavorite({super.key});
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-
     final recipes = ref.watch(recipeProvider);
     final asyncUser = ref.watch(userProvider);
 
@@ -88,7 +79,23 @@ class RecipeListFavorite extends ConsumerWidget {
             );
           }
         } else {
-          return const Center(child: Text("Login to add favorite recipes"));
+          return Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text('Log in to create recipes and add favorites',
+                    style: menuSubTitleTextStyle),
+                const SizedBox(height: 20),
+                ElevatedButton.icon(
+                  icon: const Icon(Icons.login),
+                  label: const Text('Login'),
+                  onPressed: () async {
+                    context.go('/login');
+                  },
+                ),
+              ],
+            ),
+          );
         }
       },
       error: (error, stackTrace) {
@@ -96,6 +103,37 @@ class RecipeListFavorite extends ConsumerWidget {
       },
       loading: () {
         return const Center(child: Text("Loading..."));
+      },
+    );
+  }
+}
+
+class RecipeListBySearch extends ConsumerWidget {
+  final String searchPattern;
+
+  const RecipeListBySearch({super.key, required this.searchPattern});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final recipes = ref.watch(recipeProvider);
+
+    final recipesBsearchCategory = recipes
+        .where((recipe) => recipe.recipeName
+            .toLowerCase()
+            .contains(searchPattern.toLowerCase()))
+        .toList();
+
+    if (recipesBsearchCategory.isEmpty) {
+      return Center(
+          child: Text(
+        "No recipes found by '$searchPattern'",
+        style: menuSubTitleTextStyle,
+      ));
+    }
+    return ListView.builder(
+      itemCount: recipesBsearchCategory.length,
+      itemBuilder: (context, index) {
+        return RecipeTile(recipe: recipesBsearchCategory[index]);
       },
     );
   }
