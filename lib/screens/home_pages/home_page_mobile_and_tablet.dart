@@ -14,49 +14,50 @@ class HomePageMobileAndTablet extends StatelessWidget {
     return Scaffold(
       backgroundColor: blueBackgroundColor,
       appBar: CommonAppBarWidget(),
-      body: Column(children: [
-        const SizedBox(height: 40),
-
-        // SUBTITLE
-        RichText(
-          text: TextSpan(
-            children: [
-              const WidgetSpan(
-                child: Icon(Icons.star, size: 20),
-              ),
-              TextSpan(
-                text: " Featured recipe ",
-                style: menuSubTitleTextStyle,
-              ),
-              const WidgetSpan(
-                child: Icon(Icons.star, size: 20),
-              ),
-            ],
-          ),
-        ),
-
-        const SizedBox(height: 20),
-
-        // FEATURED RECEIPE
-
-        const Expanded(child: FeaturedRecipeTile()),
-
-        const SizedBox(height: 20),
-
-        // SUBTITLE
-        Center(
-            child: Text(
-          'Hot Categories Right Now!',
-          style: menuSubTitleTextStyle,
-        )),
-
-        const SizedBox(height: 20),
-
-        // CATEGORIES
-        const Expanded(
-            child: Center(child: CategoryGrid(layoutType: "mobile"))),
-      ]),
       bottomNavigationBar: const CommonbottomBarWidget(),
+      body: SingleChildScrollView(
+        child: Column(children: [
+          const SizedBox(height: 40),
+
+          // SUBTITLE
+          RichText(
+            text: TextSpan(
+              children: [
+                const WidgetSpan(
+                  child: Icon(Icons.star, size: 20),
+                ),
+                TextSpan(
+                  text: " Featured recipe ",
+                  style: menuSubTitleTextStyle,
+                ),
+                const WidgetSpan(
+                  child: Icon(Icons.star, size: 20),
+                ),
+              ],
+            ),
+          ),
+
+          const SizedBox(height: 20),
+
+          // FEATURED RECEIPE
+
+          const FeaturedRecipeTile(),
+
+          const SizedBox(height: 20),
+
+          // SUBTITLE
+          Center(
+              child: Text(
+            'Hot Categories Right Now!',
+            style: menuSubTitleTextStyle,
+          )),
+
+          const SizedBox(height: 20),
+
+          // CATEGORIES
+          const SizedBox(height: 300, child: CategoryGrid(layoutType: "mobile")),
+        ]),
+      ),
     );
   }
 }

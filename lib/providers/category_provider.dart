@@ -21,6 +21,7 @@ class CategoryNotifier extends StateNotifier<List<Category>> {
         .map((doc) => Category.fromFirestore(doc.data(), doc.id))
         .toList();
     state = categories;
+
   }
 }
 
@@ -29,4 +30,3 @@ final categoryProvider =
         (ref) => CategoryNotifier());
 
 final selectedCategoryProvider = StateProvider<String>((ref) => '');
-final searchedCategoryProvider = StateProvider<String>((ref) => '');
