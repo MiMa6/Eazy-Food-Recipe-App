@@ -3,7 +3,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import '../providers/user_provider.dart';
 import '../models/recipe.dart';
 
-// TODO: pagination queries
 class RecipeNotifier extends StateNotifier<List<Recipe>> {
   final String userId;
   DocumentSnapshot? lastDocument;
@@ -28,6 +27,19 @@ class RecipeNotifier extends StateNotifier<List<Recipe>> {
 
     if (!mounted) return;
     state = recipes;
+  }
+
+  Future<Recipe> getRecipeByName(String name) async {
+    final snapshot = await _firestore
+        .collection('recipes')
+        .where('recipeName', isEqualTo: name)
+        .get();
+
+    final recipe = snapshot.docs
+        .map((doc) => Recipe.fromFirestore(doc.data(), doc.id))
+        .toList();
+
+    return recipe[0];
   }
 
   void addRecipe(String recipeName, List<String> ingredients,

@@ -8,7 +8,6 @@ import '../providers/recipe_provider.dart';
 import '../../models/recipe.dart';
 import '../components/recipe_selection_home.dart';
 
-// TODO: no element when refreshing tile
 
 class RecipeTileDetailed extends StatelessWidget {
   final Recipe recipe;
@@ -17,6 +16,8 @@ class RecipeTileDetailed extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    
     return GestureDetector(
       onTap: () {
         context.go('/recipes/byname/${recipe.recipeName}');
