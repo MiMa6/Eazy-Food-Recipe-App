@@ -27,9 +27,15 @@ Tablet and Desktop versions use page where the content of categories and recipe 
 
 In any page By clicking app bar search field you can find recipe by name. E.g. writiing "pepperoni" you get list of recipes including pepperoni in the name.
 
-### Add recipe page
+### My Recipe Page
 
 In this page you got forms for adding your own recipes. You can choose name that sounds great for you. Ingredients and steps are listed by "/" separator. E.g. Ingredients: 1 potato / 2 onion. Category can be selected by clicking the form and choosing from list of premade categories. Finally push submit
+
+### Login Page
+Here you can login anonymously to create, delete and see favorite recipes. When you login there comes actionable icons beside recipe names in list for adding favourite and deleting recipes. Default recipes cant be deleted, only recipes you made yourself
+
+### Favorite Page
+See recipes you have added to favourite and count how many have added some recipe as favorite
 
 ### App- & Bottom bar
 
@@ -47,13 +53,13 @@ These are common elements that are shown in every page of app. In app bar you se
 
 
 ### Dependencies
-* cupertino_icons: ^1.0.2
-* flutter_riverpod: ^2.4.0
-* go_router: ^10.1.2
-* riverpod: ^2.4.0
-* shared_preferences: ^2.2.1
-* google_fonts: ^6.1.0
-* firebase_core: ^2.23.0
-* cloud_firestore: ^4.13.2
-* firebase_auth: ^4.14.1
-* firebase_ui_firestore: ^1.5.14
+  cupertino_icons: ^1.0.2
+  flutter_riverpod: ^2.4.0
+  go_router: ^10.1.2
+  riverpod: ^2.4.0
+  shared_preferences: ^2.2.1
+  google_fonts: ^6.1.0
+  firebase_core: ^2.23.0
+  cloud_firestore: ^4.13.2
+  firebase_auth: ^4.14.1
+  firebase_ui_firestore: ^1.5.14
