@@ -4,6 +4,12 @@
 
 ## Eazt Food Repices Application
 
+## Website url
+https://mima6.github.io/Food-Recipe-App-site/
+
+## Repo url
+https://github.com/MiMa6/Eazy-Food-Recipe-App
+
 ## Description
 
 Eazy food app lets you find all of the most delicious repices for your preferences! You can search hot and featured recipies and follow step by step instructions how to make those delecious dices. If you want to influence others with you taste share your own favourite recipe for others!
